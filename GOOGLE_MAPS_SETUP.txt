@@ -1,0 +1,13 @@
+BAGBRIDGE GOOGLE MAPS SUGGESTIONS SETUP
+
+1. In Google Cloud Console, create/select a project.
+2. Enable Maps JavaScript API and Places API.
+3. Configure billing as required by Google Maps Platform.
+4. Create an API key and restrict it to your website domain and required APIs.
+5. Open templates/index.html and replace:
+   YOUR_GOOGLE_MAPS_API_KEY
+   with your Google Maps API key.
+6. For local testing, add/refine allowed website referrers for localhost if needed.
+7. Never commit an unrestricted API key to a public repository.
+
+Without the API key, Google Maps autocomplete suggestions will not appear.

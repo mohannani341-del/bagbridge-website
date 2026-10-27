@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}BagBridge | Easy Luggage Shipping Quotes{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> LUGGAGE SHIPPING, MADE SIMPLE</span>
+      <h1>Your bags.<br><span>Our journey.</span></h1>
+      <p class="hero-lede">Travel lighter. Send your suitcases ahead with a simple quote request and a team ready to help.</p>
+      <div class="hero-actions"><a class="button button-primary" href="#quote">Get a free quote <span>↗</span></a><a class="text-link" href="{{ url_for('how_it_works') }}">See how it works <span>→</span></a></div>
+      <div class="hero-proof"><div class="proof-icon">✓</div><div><strong>Personal support, every step</strong><small>Tell us what you need. We’ll help with the next steps.</small></div></div>
+    </div>
+    <div class="hero-art" aria-label="Illustration of luggage ready for a journey">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <div class="travel-card"><div class="card-top"><span class="tiny-label">YOUR NEXT JOURNEY</span><span class="status-pill">READY TO GO</span></div>
+        <div class="suitcase"><div class="suitcase-handle"></div><div class="suitcase-ridge ridge-one"></div><div class="suitcase-ridge ridge-two"></div><div class="suitcase-ridge ridge-three"></div><div class="suitcase-badge">B</div><div class="suitcase-wheel wheel-one"></div><div class="suitcase-wheel wheel-two"></div></div>
+        <div class="route"><div class="route-point"></div><div class="route-line"></div><div class="route-point route-end"></div><div class="route-labels"><span>YOUR PICKUP</span><span>YOUR DESTINATION</span></div></div>
+      </div>
+      <div class="floating-chip chip-top"><span>✦</span> Less to carry</div><div class="floating-chip chip-bottom"><span>↗</span> More freedom</div>
+    </div>
+  </div>
+  <div class="container hero-bottom"><span>BUILT AROUND YOUR JOURNEY</span><div><span>01</span> Simple quote requests</div><div><span>02</span> Helpful human support</div><div><span>03</span> Clear next steps</div></div>
+</section>
+<section class="benefits section-pad"><div class="container">
+  <div class="section-heading"><span class="eyebrow">A BETTER WAY TO SEND BAGS</span><h2>Make room for <span>the good part.</span></h2><p>We make it easier to explore luggage-shipping options without a complicated booking process.</p></div>
+  <div class="benefit-grid"><article class="benefit-card"><div class="icon-box">✦</div><h3>Travel lighter</h3><p>Plan ahead and ask about sending your luggage to your destination.</p><span class="card-number">01</span></article><article class="benefit-card"><div class="icon-box">⌁</div><h3>Simple from the start</h3><p>Share your route, bag count and address details in one convenient form.</p><span class="card-number">02</span></article><article class="benefit-card"><div class="icon-box">♡</div><h3>Real support</h3><p>Our quote process starts with your needs, so we can follow up with relevant options.</p><span class="card-number">03</span></article></div>
+</div></section>
+<section class="process-section section-pad"><div class="container process-grid"><div><span class="eyebrow">HOW IT WORKS</span><h2>Three steps.<br><span>One less thing to carry.</span></h2><p class="muted">Start with a few details. Our team can review your request and help you understand the available options.</p><a class="button button-dark" href="{{ url_for('how_it_works') }}">Explore the process <span>→</span></a></div>
+<div class="steps"><div class="step"><span class="step-no">01</span><div><h3>Tell us about your trip</h3><p>Enter pickup and delivery areas and ZIP/postal codes.</p></div></div><div class="step"><span class="step-no">02</span><div><h3>Request your quote</h3><p>Share bag quantity, dates and any special instructions.</p></div></div><div class="step"><span class="step-no">03</span><div><h3>We’ll follow up</h3><p>We’ll review the enquiry and contact you about the next steps.</p></div></div></div></div></section>
+<section class="quote-section section-pad" id="quote"><div class="container quote-layout">
+  <div class="quote-intro"><span class="eyebrow eyebrow-light">LET’S GET YOU MOVING</span><h2>Every great journey starts <span>with a few details.</span></h2><p>Tell us where your bags need to go. Include complete pickup and delivery addresses so we can understand your request.</p>
+    <div class="quote-note"><span class="note-icon">↗</span><div><strong>No account needed</strong><p>Just fill out the form. No sign-up or customer login required.</p></div></div>
+    <div class="quote-note"><span class="note-icon">⌂</span><div><strong>Complete address details</strong><p>Start typing a pickup or delivery area and choose a suggested location, then enter each ZIP/postal code.</p></div></div>
+  </div>
+  <div class="quote-form-card">
+    <div class="form-title"><div><span class="form-kicker">START HERE</span><h3>Request a quote</h3></div><span class="form-step">01 <i>/</i> 01</span></div>
+    {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+    <form method="post" action="{{ url_for('submit_enquiry') }}" id="quote-form">
+      <h4 class="form-section-heading"><span>01</span> Your details</h4>
+      <div class="form-grid"><label>Full name <em>*</em><input name="customer_name" autocomplete="name" required placeholder="Your full name"></label><label>Email address <small>(optional)</small><input type="email" name="customer_email" autocomplete="email" placeholder="you@example.com"></label><label>Phone number <em>*</em><input type="tel" name="customer_phone" autocomplete="tel" required placeholder="+1 (555) 000-0000"></label></div>
+      <h4 class="form-section-heading"><span>02</span> Pickup location</h4>
+      <div class="form-grid">
+        <label class="full">Pickup area / location <em>*</em><input name="pickup_location" id="pickup-location" autocomplete="off" required placeholder="Start typing an address, place or ZIP code"></label>
+        <label>Pickup ZIP / postal code <em>*</em><input name="pickup_zip" id="pickup-zip" required inputmode="numeric" placeholder="e.g. 10001"></label>
+      </div>
+      <h4 class="form-section-heading"><span>03</span> Delivery location</h4>
+      <div class="form-grid">
+        <label>Recipient full name <em>*</em><input name="delivery_name" required placeholder="Recipient's full name"></label>
+        <label>Recipient phone <em>*</em><input type="tel" name="delivery_phone" required placeholder="+1 (555) 000-0000"></label>
+        <label class="full">Delivery area / location <em>*</em><input name="delivery_location" id="delivery-location" autocomplete="off" required placeholder="Start typing an address, place or ZIP code"></label>
+        <label>Delivery ZIP / postal code <em>*</em><input name="delivery_zip" id="delivery-zip" required inputmode="numeric" placeholder="e.g. 90001"></label>
+        <label>Recipient email<input type="email" name="delivery_email" placeholder="Optional"></label>
+      </div>
+      <h4 class="form-section-heading"><span>04</span> Bag and travel details</h4>
+      <div class="form-grid"><label>Number of bags <em>*</em><select name="bags_count" required><option value="">Select bags</option><option value="0">0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option></select></label><label>Number of boxes <em>*</em><select name="boxes_count" required><option value="">Select boxes</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option></select></label><label>Estimated total weight<input name="estimated_weight" placeholder="e.g. 45 lb / 20 kg"></label><label>Preferred pickup date<input type="date" name="pickup_date"></label><label>Preferred delivery date<input type="date" name="delivery_date"></label><label class="full">Additional details<textarea name="message" rows="3" placeholder="Tell us about your bags, boxes, or any special requirements..."></textarea></label></div>
+      <label class="consent"><input type="checkbox" required><span>I agree that BagBridge may use these details to respond to my quote request.</span></label>
+      <button class="button button-primary submit-button" type="submit">Raise an enquiry <span>↗</span></button><p class="form-privacy">Your enquiry is handled by the BagBridge team. Please do not include payment card details or other sensitive information.</p>
+    </form>
+  </div>
+</div></section>
+<section class="closing-cta"><div class="container closing-inner"><div><span class="eyebrow">YOUR NEXT TRIP, SIMPLIFIED</span><h2>Ready to send your bags ahead?</h2></div><a class="button button-primary" href="#quote">Let’s get started <span>↗</span></a></div></section>
+{% endblock %}
